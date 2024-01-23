@@ -1,7 +1,7 @@
-import {Form} from "./common/Form";
-import {IOrderForm, IContactForm, IActions} from "../types";
-import {IEvents} from "../types";
-import {ensureElement} from "../utils/utils";
+import {Form} from "./Form";
+import {IOrderForm, IContactForm, IActions} from "../../types";
+import {IEvents} from "../../types";
+import {ensureElement} from "../../utils/utils";
 
 export class OrderForm extends Form<IOrderForm> {
   protected _cardButton: HTMLButtonElement;

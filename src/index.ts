@@ -10,7 +10,7 @@ import {Modal} from "./components/common/Modal";
 import {IContactForm, IOrderForm, IOrder} from "./types";
 import { Card } from './components/Card';
 import { Basket } from './components/Basket';
-import { OrderForm, ContactForm } from './components/Order';
+import { OrderForm, ContactForm } from './components/common/Order';
 import { Success } from './components/Success';
 
 const events = new EventEmitter();

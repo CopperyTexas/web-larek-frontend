@@ -4,7 +4,7 @@
 .basket {
   @include mixins.flex(column);
   gap: 2rem;
-  min-height: 642px;
+  min-height: 645px;
   height: 100%;
   &__list {
     padding: 0;
