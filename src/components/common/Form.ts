@@ -1,7 +1,7 @@
 import {Component} from "../base/Component";
-import { IEvents } from "../../types";
+import { IEvents } from "../../types/index";
 import {ensureElement} from "../../utils/utils";
-import { IFormState } from "../../types";
+import { IFormState } from "../../types/index";
 
 export class Form<T> extends Component<IFormState> {
     protected _submit: HTMLButtonElement;
@@ -27,6 +27,16 @@ export class Form<T> extends Component<IFormState> {
     }
 
     protected onInputChange(field: keyof T, value: string) {
+        // Автоматическая коррекция номера телефона
+        if (field === 'phone' && value.startsWith('8')) {
+            value = '+7' + value.substring(1);
+            // Обновление значения в поле ввода
+            const phoneInput = this.container.elements.namedItem('phone') as HTMLInputElement;
+            if (phoneInput) {
+                phoneInput.value = value;
+            }
+        }
+
         this.events.emit(`${this.container.name}.${String(field)}:change`, {
             field,
             value

@@ -26,7 +26,7 @@ export interface IProduct {
     description: string;
     price: number | null;
     category: string;
-    imageUrl: string;
+    image: string;
     // Дополнительные поля по необходимости...
 }
 export interface IAppState {
@@ -61,11 +61,10 @@ export interface IContactForm {
     // Дополнительные поля по необходимости...
 }
 
-export interface IPage {
+export interface IPage{
     counter: number;
     catalog: HTMLElement[];
-    locked: boolean;
-}
+  }
 export interface IModalData {
     content: HTMLElement;
 }

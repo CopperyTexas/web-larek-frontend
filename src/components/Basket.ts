@@ -1,7 +1,7 @@
-import {Component} from "../base/Component";
-import {createElement, ensureElement} from "../../utils/utils";
-import {IBasketView} from "../../types";
-import {EventEmitter} from "../base/events";
+import {Component} from "./base/Component";
+import {createElement, ensureElement} from "../utils/utils";
+import {IBasketView} from "../types";
+import {EventEmitter} from "./base/events";
 
 export class Basket extends Component<IBasketView> {
     protected _list: HTMLElement;
@@ -25,7 +25,7 @@ export class Basket extends Component<IBasketView> {
         this._button.disabled = true;
     }
 
-    toggleStateButton(isDisabled: boolean){
+    toggleButton(isDisabled: boolean){
       this._button.disabled = isDisabled;
     }
 

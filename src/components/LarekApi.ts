@@ -1,5 +1,5 @@
-import { Api } from "../base/api";
-import { IOrderResult, IProduct, IOrder, ApiListResponse, ILarekAPI } from "../../types";
+import { Api } from "./base/api";
+import { IOrderResult, IProduct, IOrder, ApiListResponse, ILarekAPI } from "../types";
 
 export class LarekAPI extends Api implements ILarekAPI {
   readonly cdn: string;
@@ -13,7 +13,7 @@ export class LarekAPI extends Api implements ILarekAPI {
     return this.get('/product').then((data: ApiListResponse<IProduct>) =>
       data.items.map((item) => ({
         ...item,
-        image: this.cdn + item.imageUrl
+        image: this.cdn + item.image
       }))
     );
   }
@@ -22,7 +22,7 @@ export class LarekAPI extends Api implements ILarekAPI {
     return this.get(`/product/${id}`).then(
         (item: IProduct) => ({
             ...item,
-            image: this.cdn + item.imageUrl
+            image: this.cdn + item.image
         })
     );
   }

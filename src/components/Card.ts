@@ -1,7 +1,7 @@
-import {Component} from "../base/Component";
-import {ICard, IActions} from "../../types";
-import {ensureElement} from "../../utils/utils";
-import {productCategory} from "../../utils/constants"
+import {Component} from "./base/Component";
+import {ICard, IActions} from "../types";
+import {ensureElement} from "../utils/utils";
+import {productCategory} from "../utils/constants"
 
 export class Card extends Component<ICard> {
     protected _index?: HTMLElement;
@@ -33,7 +33,7 @@ export class Card extends Component<ICard> {
     }
   }
 
-  unablePriceButton(value: number | null) {
+  disablePriceButton(value: number | null) {
     if(!value){
       if(this._button){
         this._button.disabled = true;
@@ -59,7 +59,7 @@ export class Card extends Component<ICard> {
 
   set price(value: number | null) {
     this.setText(this._price, (value) ? `${value.toString()} синапсов` : '');
-    this.unablePriceButton(value);
+    this.disablePriceButton(value);
   }
 
   get price(): number {

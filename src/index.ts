@@ -1,17 +1,17 @@
 import './scss/styles.scss';
 
-import {LarekAPI} from "./components/common/LarekApi";
+import {LarekAPI} from "./components/LarekApi";
 import {API_URL, CDN_URL, PaymentMethods} from "./utils/constants";
 import {EventEmitter} from "./components/base/events";
-import {AppState, CatalogChangeEvent, Product} from "./components/common/AppData";
-import {Page} from "./components/common/Page";
+import {AppState, CatalogChangeEvent, Product} from "./components/AppData";
+import {Page} from "./components/Page";
 import {cloneTemplate, createElement, ensureElement} from "./utils/utils";
 import {Modal} from "./components/common/Modal";
 import {IContactForm, IOrderForm, IOrder} from "./types";
-import { Card } from './components/common/Card';
-import { Basket } from './components/common/Basket';
-import { OrderForm, ContactForm } from './components/common/Order';
-import { Success } from './components/common/Success';
+import { Card } from './components/Card';
+import { Basket } from './components/Basket';
+import { OrderForm, ContactForm } from './components/Order';
+import { Success } from './components/Success';
 
 const events = new EventEmitter();
 const api = new LarekAPI(CDN_URL, API_URL);
@@ -46,7 +46,7 @@ events.on<CatalogChangeEvent>('items:changed', function () {
             });
             return card.render({
                 title: item.title,
-                imageUrl: item.imageUrl,
+                image: item.image,
                 price: item.price,
                 category: item.category
             });
@@ -69,7 +69,7 @@ events.on('preview:changed', (item: Product) => {
     content: card.render({
       title: item.title,
       description: item.description,
-      imageUrl: item.imageUrl,
+      image: item.image,
       price: item.price,
       category: item.category,
       buttonTitle: (appData.basket.indexOf(item) < 0) ? 'Купить' : "Удалить из корзины"
@@ -111,7 +111,7 @@ events.on('basket:changed', (items: Product[]) => {
   const total = items.reduce((total, item) => total + item.price, 0)
   basket.total = total
   appData.order.total = total;
-  basket.toggleStateButton(total === 0)
+  basket.toggleButton(total === 0)
 })
 
 events.on('counter:changed', (item: string[]) => {
