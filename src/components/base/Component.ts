@@ -1,58 +1,67 @@
-
-
-/**
- * Базовый компонент
- */
 export abstract class Component<T> {
-    protected constructor(protected readonly container: HTMLElement) {
-        // Учитывайте что код в конструкторе исполняется ДО всех объявлений в дочернем классе
-    }
+    // Конструктор класса, инициализирующий контейнер компонента
+    protected constructor(protected readonly container: HTMLElement) {}
 
-    // Инструментарий для работы с DOM в дочерних компонентах
-
-    // Переключить класс
-    toggleClass(element: HTMLElement, className: string, force?: boolean) {
+    // Переключает класс у указанного элемента
+    toggleClass(element: HTMLElement, className: string, force?: boolean): void {
+        if (!element) {
+            console.warn("Element not found for toggleClass");
+            return;
+        }
         element.classList.toggle(className, force);
     }
 
-    // Установить текстовое содержимое
-    protected setText(element: HTMLElement, value: unknown) {
-        if (element) {
-            element.textContent = String(value);
+    // Устанавливает текстовое содержимое для указанного элемента
+    protected setText(element: HTMLElement, value: unknown): void {
+        if (!element) {
+            console.warn("Element not found for setText");
+            return;
         }
+        element.textContent = String(value);
     }
 
-    // Сменить статус блокировки
-    setDisabled(element: HTMLElement, state: boolean) {
-        if (element) {
-            if (state) element.setAttribute('disabled', 'disabled');
-            else element.removeAttribute('disabled');
+    // Устанавливает или снимает атрибут 'disabled' для указанного элемента
+    setDisabled(element: HTMLElement, state: boolean): void {
+        if (!element) {
+            console.warn("Element not found for setDisabled");
+            return;
         }
+        state ? element.setAttribute('disabled', 'disabled') : element.removeAttribute('disabled');
     }
 
-    // Скрыть
-    protected setHidden(element: HTMLElement) {
+    // Скрывает указанный элемент, устанавливая display: none
+    protected setHidden(element: HTMLElement): void {
+        if (!element) {
+            console.warn("Element not found for setHidden");
+            return;
+        }
         element.style.display = 'none';
     }
 
-    // Показать
-    protected setVisible(element: HTMLElement) {
+    // Делает указанный элемент видимым, удаляя свойство display
+    protected setVisible(element: HTMLElement): void {
+        if (!element) {
+            console.warn("Element not found for setVisible");
+            return;
+        }
         element.style.removeProperty('display');
     }
 
-    // Установить изображение с алтернативным текстом
-    protected setImage(element: HTMLImageElement, src: string, alt?: string) {
-        if (element) {
-            element.src = src;
-            if (alt) {
-                element.alt = alt;
-            }
+    // Устанавливает изображение и альтернативный текст для элемента <img>
+    protected setImage(element: HTMLImageElement, src: string, alt?: string): void {
+        if (!element) {
+            console.warn("Element not found for setImage");
+            return;
         }
+        element.src = src;
+        if (alt) element.alt = alt;
     }
 
-    // Вернуть корневой DOM-элемент
+    // Обновляет состояние компонента с помощью переданных данных
     render(data?: Partial<T>): HTMLElement {
-        Object.assign(this as object, data ?? {});
+        if (data) {
+            Object.assign(this, data);
+        }
         return this.container;
     }
 }
