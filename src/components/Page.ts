@@ -3,21 +3,21 @@ import { IEvents } from "../types/index";
 import { ensureElement } from "../utils/utils";
 import { IPage } from "../types/index";
 
-
+// Класс Page управляет отображением и взаимодействием с основными элементами страницы
 export class Page extends Component<IPage> {
-    protected _counter: HTMLElement;
-    protected _catalog: HTMLElement;
-    protected _wrapper: HTMLElement;
-    protected _basket: HTMLElement;
+    protected _counter: HTMLElement; // Элемент счетчика товаров в корзине
+    protected _catalog: HTMLElement; // Контейнер для отображения каталога товаров
+    protected _wrapper: HTMLElement; // Обертка страницы для управления блокировкой
+    protected _basket: HTMLElement; // Кнопка корзины для открытия
 
     constructor(container: HTMLElement, protected events: IEvents) {
         super(container);
 
         // Инициализация элементов интерфейса
-        this._counter = ensureElement<HTMLElement>('.header__basket-counter');
-        this._catalog = ensureElement<HTMLElement>('.gallery');
-        this._wrapper = ensureElement<HTMLElement>('.page__wrapper');
-        this._basket = ensureElement<HTMLElement>('.header__basket');
+        this._counter = ensureElement<HTMLElement>('.header__basket-counter', container);
+        this._catalog = ensureElement<HTMLElement>('.gallery', container);
+        this._wrapper = ensureElement<HTMLElement>('.page__wrapper', container);
+        this._basket = ensureElement<HTMLElement>('.header__basket', container);
 
         // Назначение обработчика события для корзины
         this._basket.addEventListener('click', () => {
